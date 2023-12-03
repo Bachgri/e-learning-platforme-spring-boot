@@ -29,4 +29,8 @@ public class Course {
     @OneToMany(mappedBy = "course")
     //@JoinColumn(name = "course_id")
     private List<Chapter> chapters = new ArrayList() ;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Exam exam;
+    
 }

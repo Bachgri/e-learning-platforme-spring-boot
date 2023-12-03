@@ -95,6 +95,7 @@ public class userSer {
                     email,password);
             
             Authentication auth = authenticationManager.authenticate(user);
+           
             auth.getAuthorities().forEach(r->{
             	role=r.getAuthority().toString();
             });
@@ -105,7 +106,7 @@ public class userSer {
             	Student s = (Student) repoUser.findByEmail(email).get();
             	  JwtClaimsSet jwt = JwtClaimsSet.builder()
                           .issuedAt(instant)
-                          .expiresAt(instant.plus(10, ChronoUnit.MINUTES))
+                          .expiresAt(instant.plus(60, ChronoUnit.MINUTES))
                           .subject(email)
                           .claim("scope", scope)
                           .claim("valid", s.isValider())
@@ -117,6 +118,7 @@ public class userSer {
                   Map<String, String> map = new HashMap<>();
                   map.put("acces_token", token);
                   map.put("role", role);
+                 
                   return map;
             }else {
             	JwtClaimsSet jwt = JwtClaimsSet.builder()
@@ -132,6 +134,12 @@ public class userSer {
                  Map<String, String> map = new HashMap<>();
                  map.put("acces_token", token);
                  map.put("role", role);
+                 if(role.compareTo("Professor")==0) {
+                	 System.err.println("Prof name  : "+user.getName());
+                	 long id =  profRepo.findByEmail(user.getName()).get().getId();
+                	System.err.println("role "+role + "\nid: "+id); 
+               	  	map.put("id",id+"" );
+                 }
                  return map;
             }
             

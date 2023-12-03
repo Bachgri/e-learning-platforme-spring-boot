@@ -21,7 +21,7 @@ public class CourseService {
     private ProfRepo profRepo;
 
 
-
+    
     public Course get(Long id ){
         if(courseRepo.findById(id).isPresent())
             return courseRepo.findById(id).get();
@@ -66,6 +66,10 @@ public class CourseService {
     public List<Course> getAll(){
         return courseRepo.findAll();
     }
-
+    
+    public List<Course> getAll(long id){
+        return courseRepo.findByProfessor(profRepo.findById(id).get());
+    }
+    
 
 }

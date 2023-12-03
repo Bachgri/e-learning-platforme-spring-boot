@@ -80,12 +80,16 @@ public class SecondController {
     public List<Course> courses(){
         return courseService.getAll();
     }
-
+    @GetMapping("/allCourses/{id}")
+    public List<Course> courses(@PathVariable("id") long id){
+        return courseService.getAll(id);
+    }
+    
     @GetMapping("/allStudents")
     public List<Student> students(){
         return etudiantService.getAll();
     }
-
+  
     @GetMapping("/allProfessors")
     public List<Professor> professors(){
         return profRepo.findAll();
