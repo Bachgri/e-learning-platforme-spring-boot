@@ -47,7 +47,7 @@ public class AdminController {
 		return pService.post(p);
 	}
 
-	@PostMapping("/validate")
+	@PostMapping("/validate")  
 	public Student validate(@RequestBody Student s) throws Exception {
 		s.setValider(true);
 
