@@ -48,8 +48,12 @@ public class AdminController {
 	}
 
 	@PostMapping("/validate")
-	public Student validate(@RequestBody Student s) {
+	public Student validate(@RequestBody Student s) throws Exception {
 		s.setValider(true);
+
+			uSer.sendMailToStudent(s.getEmail());
+
+
 		return sRepo.save(s);
 	}
 	

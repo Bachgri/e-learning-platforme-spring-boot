@@ -50,6 +50,7 @@ public class MailController {
         return ResponseEntity.ok(number);
     }
 
+
     @PutMapping("/Change")
     public ResponseEntity<String> changePass(@RequestBody Details details){
         Student s = (Student)repoUser.findByEmail(details.email()).get();
